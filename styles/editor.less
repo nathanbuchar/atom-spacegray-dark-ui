@@ -23,18 +23,18 @@ atom-text-editor[mini].is-focused {
   to { background-color: null; }
 }
 
-atom-text-editor .cursors, atom-text-editor::shadow .cursors {
+atom-text-editor .cursors, atom-text-editor.editor .cursors {
   position: relative;
   z-index: 9001;
 }
 
-atom-text-editor::shadow .highlighted.selection .region {
+atom-text-editor.editor .highlighted.selection .region {
   -webkit-animation-name: highlight;
   -webkit-animation-duration: 1s;
   -webkit-animation-iteration-count: 1;
 }
 
-atom-text-editor .gutter, atom-text-editor::shadow .gutter {
+atom-text-editor .gutter, atom-text-editor.editor .gutter {
   color: lighten(@panel-heading-background-color, 25%);
 
   .line-number {
