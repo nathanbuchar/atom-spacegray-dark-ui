@@ -1,44 +1,64 @@
-@import "ui-mixins";
-@import "ui-variables";
-@import "buttons";
+
+// Panels
+
+atom-panel {
+  .text(normal);
+  position: relative;
+  // border-bottom: 1px solid @base-border-color;
+
+  &.top {
+    // border-right: 1px solid @base-border-color;
+  }
+  &.left {
+    // border-right: 1px solid @base-border-color;
+  }
+  &.right {
+    // border-left: 1px solid @base-border-color;
+  }
+  &.bottom {
+    // border-right: 1px solid @base-border-color;
+  }
+  &.footer:last-child {
+    border-bottom: none;
+  }
+  &.tool-panel:empty {
+    border: none;
+  }
+}
 
 .panel {
   &.bordered {
+    // border: 1px solid @base-border-color;
     border-radius: @component-border-radius;
   }
 }
 
-.tool-panel {
-  .text(normal);
-  position: relative;
-
-  background-color: @tool-panel-background-color;
-}
-
 .inset-panel {
   position: relative;
-  background-color: @inset-panel-background-color;
-}
-
-.is-blurred {
-  .tool-panel,
-  .inset-panel {
+  // background-color: @inset-panel-background-color;
+  border-radius: @component-border-radius;
+  &.bordered {
+    // border: 1px solid @base-border-color;
+    border-radius: @component-border-radius;
+  }
+  & .panel-heading {
+    border-color: @inset-panel-border-color;
   }
 }
 
 .panel-heading {
   .text(normal);
-
-  background-color: transparent;
+  // border-bottom: 1px solid @panel-heading-border-color;
+  background-color: @panel-heading-background-color;
 
   .btn {
     padding-left: 8px;
     padding-right: 8px;
-
-    @bg: lighten(@button-background-color, 10%);
-    @hover: lighten(@button-background-color-hover, 10%);
-    @selected: lighten(@button-background-color-selected, 10%);
-    @text: lighten(@text-color, 10%);
-    .btn-background(@bg, @hover, @selected, @text);
+    .btn-default(
+      lighten(@button-background-color, 10%),
+      lighten(@button-background-color-hover, 10%),
+      lighten(@button-background-color-selected, 10%),
+      lighten(@text-color, 10%)
+    );
   }
 }

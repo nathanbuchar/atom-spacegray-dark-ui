@@ -1,8 +1,5 @@
-@import "ui-variables";
-@import "ui-mixins";
-@import "octicon-mixins";
-
-.list-group, .list-tree {
+.list-group,
+.list-tree {
   li:not(.list-nested-item),
   li.list-nested-item > .list-item {
     .text(normal);
@@ -26,26 +23,42 @@
     li.list-nested-item.status-@{status} > .list-item {
       color: @color;
     }
+
+    li:not(.list-nested-item).selected.status-@{status},
+    li.list-nested-item.selected.status-@{status} > .list-item {
+      color: @color;
+    }
+
   }
 
-  .generate-list-item-status-color(@text-color-subtle, ignored);
   .generate-list-item-status-color(@text-color-added, added);
-  .generate-list-item-status-color(@text-color-renamed, renamed);
+  .generate-list-item-status-color(@text-color-ignored, ignored);
   .generate-list-item-status-color(@text-color-modified, modified);
   .generate-list-item-status-color(@text-color-removed, removed);
+  .generate-list-item-status-color(@text-color-renamed, renamed);
 
   li:not(.list-nested-item).selected,
   li.list-nested-item.selected > .list-item {
     .text(selected);
   }
+
+  .no-icon {
+    padding-left: calc(@ui-padding-icon ~"+" @component-icon-size);
+  }
+}
+
+.list-tree.has-collapsable-children .list-nested-item > .list-item::before {
+  text-align: center;
 }
 
 .select-list ol.list-group,
 &.select-list ol.list-group {
   li.two-lines {
-    .secondary-line { color: @text-color-subtle; }
+    .secondary-line {
+      color: @text-color-subtle;
+    }
     &.selected .secondary-line {
-      color: @text-color;
+      color: fade(@text-color-highlight, 50%);
       text-shadow: none;
     }
   }
@@ -57,7 +70,7 @@
     &:before{ display: none; }
   }
 
-  &.mark-active{
+  &.mark-active {
     @active-icon-size: 14px;
 
     // pad in front of the text where the icon would be We'll pad the non-
@@ -71,14 +84,15 @@
       left: auto; right: auto;
       height: @active-icon-size;
       width: @active-icon-size;
+      font-size: @active-icon-size;
     }
     > li:not(.active):before {
-      margin-right: @component-icon-padding;
+      margin-right: @ui-padding-icon;
     }
     li.active {
       .octicon(check, @active-icon-size);
       &:before {
-        margin-right: @component-icon-padding;
+        margin-right: @ui-padding-icon;
         color: @text-color-success;
       }
     }
@@ -86,17 +100,22 @@
 }
 
 .select-list.popover-list {
+  @popover-list-padding: @ui-padding/4;
   background-color: @overlay-background-color;
-  padding: @component-padding/2;
+  box-shadow: 0 2px 8px 1px rgba(0, 0, 0, 0.3);
+  padding: @popover-list-padding;
   border-radius: @component-border-radius;
-  border: 1px solid @overlay-border-color;
 
-  atom-text-editor {
-    margin-bottom: @component-padding/2;
+  atom-text-editor[mini] {
+    margin-bottom: @popover-list-padding;
+  }
+
+  ol.list-group {
+    margin-top: @popover-list-padding;
   }
 
   .list-group li {
-    padding-left: @component-padding/2;
+    padding-left: @popover-list-padding;
   }
 }
 
@@ -112,12 +131,14 @@
   }
 }
 
-li.ui-draggable-dragging, li.ui-sortable-helper {
-  line-height: @component-line-height;
-  height: @component-line-height;
+li.ui-draggable-dragging,
+li.ui-sortable-helper {
+  line-height: @ui-line-height;
+  height: @ui-line-height;
   border: 0;
   border-radius: 0;
   list-style: none;
-  padding: 0 @component-padding;
-  background: @background-color-highlight;;
+  padding: 0 @ui-padding;
+  background: @background-color-highlight;
+  box-shadow: 0 0 1px @base-border-color;
 }

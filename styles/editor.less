@@ -1,37 +1,46 @@
-@import "ui-variables";
-@import "ui-mixins";
+
+// Editor in a panel
+
+// TODO: Find a better selector, maybe a new class like atom-text-editor[medium]
+atom-panel-container atom-text-editor.is-focused {
+  .focus();
+}
+
+
+// Mini
+// Usually just single line inputs
 
 atom-text-editor[mini] {
-  color: @text-color-highlight;
-  background-color: @input-background-color;
+  overflow: auto;
+  font-size: @ui-input-size;
+  line-height: @ui-line-height;
+  max-height: @ui-line-height * 5; // rows
+  padding-left: @ui-padding/3;
   border-radius: @component-border-radius;
-  padding-left: @component-padding/2;
+  color: @text-color-highlight;
+  // border: 1px solid @input-border-color;
+  // background-color: @input-background-color;
+
   .placeholder-text {
     color: @text-color-subtle;
   }
-  .cursor { border-color: #fff; }
-  .selection .region { background-color: lighten(@input-background-color, 10%); }
-}
 
-atom-text-editor[mini].is-focused {
-  .selection .region { background-color: lighten(@app-background-color, 5%); }
-  transition: background-color 0.1s
-}
+  .selection .region {
+    background-color: @input-selection-color;
+  }
 
-@-webkit-keyframes highlight {
-  from { background-color: rgba(100, 255, 100, 0.7); }
-  to { background-color: null; }
-}
+  .cursor {
+    border-color: @accent-color;
+    border-width: 2px;
+  }
 
-atom-text-editor .cursors, atom-text-editor.editor .cursors {
-  position: relative;
-  z-index: 9001;
-}
-
-atom-text-editor.editor .highlighted.selection .region {
-  -webkit-animation-name: highlight;
-  -webkit-animation-duration: 1s;
-  -webkit-animation-iteration-count: 1;
+  &.is-focused {
+    .focus();
+    background-color: @level-1-color;
+    .selection .region {
+      background-color: @level-1-color;
+    }
+  }
 }
 
 atom-text-editor .gutter, atom-text-editor.editor .gutter {

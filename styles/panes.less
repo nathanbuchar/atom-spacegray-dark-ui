@@ -1,36 +1,22 @@
-@import "ui-mixins";
-@import "ui-variables";
-@import "buttons";
-
-.pane-item {
-  .panel {
-    border-color: fadeout(@inset-panel-border-color, 30%);
-  }
-}
 
 atom-pane-container {
+
   atom-pane {
-    background-color: darken(@tree-background-color, 2%);
+    position: relative;
+    border-right: 4px solid @level-3-color;
+    border-bottom: 4px solid @level-3-color;
 
-    &:focus {
-      background-color: darken(@tree-background-color, 3%);
+    .item-views {
+      // prevent atom-text-editor from leaking ouside might improve performance
+      overflow: hidden;
     }
   }
 
-  atom-pane-axis.horizontal > * {
-    border-right: 1px solid @pane-item-border-color;
-    &:last-child { border-right: none; }
-  }
+}
 
-  atom-pane-axis.vertical > * {
-    border-bottom: 1px solid @pane-item-border-color;
-    border-bottom: none;
-    &:last-child { border-bottom: none; }
-  }
-
-  atom-pane-axis.vertical {
-    > atom-pane-resize-handle {
-      background-color: @tree-background-color;
-    }
-  }
+// Hide right-most border
+atom-pane:only-child,
+atom-pane-axis.pane-row > atom-pane:last-child,
+atom-pane-axis.pane-column:last-child > atom-pane {
+  border-right: none;
 }

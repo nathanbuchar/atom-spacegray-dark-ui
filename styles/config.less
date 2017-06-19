@@ -1,0 +1,77 @@
+
+// Tabs ----------------------------------------------
+
+@theme-tabsizing: ~'theme-@{ui-theme-name}-tabsizing';
+@theme-dockButtons: ~'theme-@{ui-theme-name}-dock-buttons';
+
+@tab-min-width: 7em; // ~ icon + 6 characters
+
+
+// Even (default) ---------------
+
+.tab-bar {
+  .tab,
+  .tab.active {
+    flex: 1 1 0;
+    max-width: 22em;
+    min-width: @tab-min-width;
+  }
+  atom-dock & {
+    .tab,
+    .tab.active {
+      max-width: none;
+    }
+  }
+
+  // TODO: Turn this into a config
+  // Truncates the beginning instead
+  // .title.title.title {
+  //   direction: rtl; // change direction
+  // }
+}
+
+
+// Maximum (full width) ---------------
+
+[@{theme-tabsizing}="maximum"] .tab-bar {
+  .tab,
+  .tab.active {
+    max-width: none;
+  }
+}
+
+
+// Minimum (show long paths) ---------------
+
+[@{theme-tabsizing}="minimum"] .tab-bar {
+  .tab,
+  .tab.active {
+    flex: 0 0 auto;
+    min-width: 2.75em;
+    max-width: @tab-min-width * 3.3;
+  }
+  atom-dock {
+    .tab,
+    .tab.active {
+      max-width: @tab-min-width * 2;
+    }
+  }
+}
+
+
+
+// Hide docks toggle buttons ------------------------------
+
+[@{theme-dockButtons}="hidden"] {
+
+  // Hide docks when not open
+  .atom-dock-inner:not(.atom-dock-open) {
+    display: none;
+  }
+
+  // Hide toggle buttons
+  .atom-dock-toggle-button {
+    display: none;
+  }
+
+}
